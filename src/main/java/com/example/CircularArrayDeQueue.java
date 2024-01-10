@@ -5,10 +5,10 @@ import java.util.NoSuchElementException;
 
 public class CircularArrayDeQueue<E> implements DeQueue<E> {
     private static final int DEFAULT_CAPACITY = 8;
-    private int size;
-    private int f; //front
-    private int r; //rear
-    private E[] array;
+    private int size; //The current number of elements in the circular array deque.
+    private int f; //front of dequeue
+    private int r; //rear of dequeue
+    public E[] array;
     private volatile int modCount; // Modification count for iterator safety
 
     public CircularArrayDeQueue() {
@@ -23,10 +23,12 @@ public class CircularArrayDeQueue<E> implements DeQueue<E> {
     public void pushFirst(E elem) {
         if (size == array.length) {
             doubleCapacity();
-        } else if (isEmpty()) { // If it's empty, push to the first 
-            f = 0;
+        }
+    
+        if (isEmpty()) {
+            f = array.length - 1; // Set front to the last position if the queue is initially empty
         } else {
-            f = (f - 1 + array.length) % array.length;
+            f = (f - 1 + array.length) % array.length; // Move the front position circularly
         }
     
         array[f] = elem;
@@ -48,44 +50,85 @@ public class CircularArrayDeQueue<E> implements DeQueue<E> {
 
     @Override
     public E popFirst() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Que is empty");
+        }
+        E removedElement = array[f]; // Deleted element
+        array[f] = null; 
+
+        f = (f + 1) % array.length;
+        size--;
+        if(isEmpty()) {
+            f = r = 0; // The Queue has become empty
+            size = 0;
+        }
+        if (size <= array.length/4) {
+            halfCapacity();
+        }
         
-        return null; 
+        return removedElement; 
     }
 
     @Override
     public E popLast() {
-        
-        return null; 
+        if (isEmpty()) {
+            throw new NoSuchElementException("Que is empty");
+        }
+        r = (r - 1 + array.length) % array.length;
+
+        E removedElement = array[r];
+
+        array[r] = null;
+
+        if(isEmpty()) {
+            f = r = 0; // The Queue has become empty
+            size = 0;
+        }
+        size--;
+        if (size <= array.length/4) {
+            halfCapacity();
+        }
+        return removedElement; 
     }
 
     @Override
     public E first() {
+
         if (isEmpty()) {
-            throw new NoSuchElementException();
+            throw new NoSuchElementException("Que is empty");
         }
-        return (E) array[f];
+        return (E) array[f]; //Return the element at the front of the queue
     }
 
     @Override
     public E last() {
-       
-        return null; 
+        if (isEmpty()) {
+            throw new NoSuchElementException("Queue is empty");
+        }
+    
+        int lastIndex = (r - 1 + array.length) % array.length;
+        return array[lastIndex];
     }
 
     @Override
     public boolean isEmpty() {
-        return f == r; 
+        return f == r || size == 0;  //The queue is empty when the rear is equal to the front
     }
 
     @Override
     public int size() {
-       
-        return 0; 
+       return size;
     }
 
     @Override
     public void clear() {
-        
+        f = 0;
+        r = 0;
+        size = 0;
+
+        array = (E[]) new Object[DEFAULT_CAPACITY];
+        modCount++;
+
     }
 
     @Override
@@ -103,7 +146,7 @@ public class CircularArrayDeQueue<E> implements DeQueue<E> {
 
             @Override
             public E next() {
-                checkForComodification();// Check for concurrent modification
+                checkForComodification(); // Check for concurrent modification
 
                 if (!hasNext()) {
                     throw new NoSuchElementException();
@@ -124,11 +167,37 @@ public class CircularArrayDeQueue<E> implements DeQueue<E> {
 
     @Override
     public Iterator<E> descendingIterator() {
-        // Your implementation
-        return null; // Placeholder, replace with the actual return statement
+        return new Iterator<E>() {
+            private int current = (r - 1 + array.length) % array.length;
+
+            private final int lastReturnedModCount = modCount;
+
+            @Override
+            public boolean hasNext() {
+                return current != f; // Check if the current position is not equal to the front
+            }
+            public E next() {
+                checkForComodification();
+
+                if(!hasNext()){
+                    throw new NoSuchElementException();
+                }
+
+                E result = array[current];
+                current = (current - 1 + array.length) %array.length;
+                return result;
+            }
+
+            private void checkForComodification() {
+                if(modCount != lastReturnedModCount) {
+                    throw new ConcurrentModificationException();    
+                }
+            }
+        };
+         
     }
 
-    private void doubleCapacity() {
+    private void doubleCapacity() { 
         int newCapacity = 2 * array.length;
         E[] newArray = (E[]) new Object[newCapacity];
 
@@ -140,5 +209,19 @@ public class CircularArrayDeQueue<E> implements DeQueue<E> {
         r = size;
     }
 
+    private void halfCapacity() {
+        int oldCapacity = array.length;
+        int newCapacity = oldCapacity/2;
 
+        E[] newArray = (E[]) new Object[newCapacity];
+
+        int index = 0;
+        for (int i = f; i < f + size; i++){
+            newArray[index] = array[i % oldCapacity];
+            index++;
+        }
+        array = newArray;
+        f = 0;
+        r = size;
+    }
 }
