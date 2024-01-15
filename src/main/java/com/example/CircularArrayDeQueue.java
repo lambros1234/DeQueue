@@ -1,4 +1,5 @@
 package com.example;
+import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -13,7 +14,7 @@ public class CircularArrayDeQueue<E> implements DeQueue<E> {
 
     public CircularArrayDeQueue() {
         this.size = 0;
-        this.f = 0; //initialize front with -1 
+        this.f = 0;  
         this.r = 0;
         this.array = (E[]) new Object[DEFAULT_CAPACITY];
     }
@@ -57,6 +58,7 @@ public class CircularArrayDeQueue<E> implements DeQueue<E> {
         array[f] = null; 
 
         f = (f + 1) % array.length;
+
         size--;
         if(isEmpty()) {
             f = r = 0; // The Queue has become empty
@@ -80,11 +82,12 @@ public class CircularArrayDeQueue<E> implements DeQueue<E> {
 
         array[r] = null;
 
+        size--;
+
         if(isEmpty()) {
             f = r = 0; // The Queue has become empty
             size = 0;
         }
-        size--;
         if (size <= array.length/4) {
             halfCapacity();
         }
@@ -112,7 +115,7 @@ public class CircularArrayDeQueue<E> implements DeQueue<E> {
 
     @Override
     public boolean isEmpty() {
-        return f == r || size == 0;  //The queue is empty when the rear is equal to the front
+        return size == 0;  //The queue is empty when the rear is equal to the front
     }
 
     @Override
@@ -166,36 +169,46 @@ public class CircularArrayDeQueue<E> implements DeQueue<E> {
     }
 
     @Override
-    public Iterator<E> descendingIterator() {
+    public Iterator<E> descendingIterator() {       
         return new Iterator<E>() {
             private int current = (r - 1 + array.length) % array.length;
+            private boolean hasPrintedFront = false; //becomes true when the front has been printed
 
             private final int lastReturnedModCount = modCount;
 
             @Override
             public boolean hasNext() {
-                return current != f; // Check if the current position is not equal to the front
+                return !hasPrintedFront; // Check if the current position is not equal to the front or front hasn't been printed
             }
+
+            @Override
             public E next() {
                 checkForComodification();
 
-                if(!hasNext()){
+                if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
 
                 E result = array[current];
-                current = (current - 1 + array.length) %array.length;
+
+                if (current == f) {
+                    hasPrintedFront = true; // Set to true after printing the front
+                }
+
+                current = (current - 1 + array.length) % array.length;
                 return result;
             }
 
             private void checkForComodification() {
-                if(modCount != lastReturnedModCount) {
-                    throw new ConcurrentModificationException();    
+                if (modCount != lastReturnedModCount) {
+                    throw new ConcurrentModificationException();
                 }
             }
         };
-         
     }
+
+         
+    
 
     private void doubleCapacity() { 
         int newCapacity = 2 * array.length;
@@ -223,5 +236,18 @@ public class CircularArrayDeQueue<E> implements DeQueue<E> {
         array = newArray;
         f = 0;
         r = size;
+    }
+
+    public void printDequeStatus() {
+        System.out.println(Arrays.toString(array));
+
+        if (!isEmpty()) {
+            System.out.println("Front is: " + first());
+            System.out.println("Rear is: " + last());
+        } else {
+            System.out.println("Deque is empty.");
+        }
+
+        System.out.println();
     }
 }

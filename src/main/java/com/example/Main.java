@@ -6,107 +6,57 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
+        DeQueue<Integer> deque = new CircularArrayDeQueue<>();
 
-        
-        CircularArrayDeQueue queue = new CircularArrayDeQueue();
-
-
-        for(int i = 0; i < 10; i++) {
-            queue.pushFirst(i);   
+        // Test the DeQueue operations
+        System.out.println("Pushing to front:");
+        for(int i = 0; i < 5; i++) {
+            deque.pushFirst(i);   
         }
+        deque.printDequeStatus();
+    
 
-        System.out.println(Arrays.toString(queue.array));
-        System.out.println("Front is: " + queue.first());
-        System.out.println("Rear is: " + queue.last());
-        System.out.println();
-
-
-        
-
-        /*System.out.println("Add 3 elements");
-        queue.pushFirst(11);
-        queue.pushLast(22);
-        queue.pushLast(44);
-        queue.pushFirst(33);
-        queue.printQueue();
-        queue.printArray();
-        System.out.println();
-
-        System.out.println("Remove 1 element from rear");
-        System.out.println("Remove: " + queue.last());
-        queue.popLast();
-        queue.printQueue();
-        queue.printArray();
-        System.out.println();
-
-        System.out.println("Add 1 more element at rear");
-        queue.pushLast(45);
-        queue.printQueue();
-        queue.printArray();
-        System.out.println();
-
-        System.out.println("Add 1 more element at front");
-        queue.pushFirst(55);
-        queue.printQueue();
-        queue.printArray();
-        System.out.println();
-
-        System.out.println("Remove 1 element from rear");
-        System.out.println("Remove: " + queue.last());
-        queue.popLast();
-        queue.printQueue();
-        queue.printArray();
-        System.out.println();
-
-
-        System.out.println("Pop twice from front");
-        System.out.println("Pop: " +  queue.first());
-        queue.popFirst();
-        queue.printQueue();
-        queue.printArray();
-        System.out.println("Pop: " + queue.first());
-        queue.popFirst();
-        queue.printQueue();
-        queue.printArray();
-        queue.printQueue();
-        queue.printArray();
-        System.out.println();
-
-
-
-        System.out.println("Add 4 more elements");
-        queue.pushFirst(66);
-        queue.pushFirst(77);
-        queue.pushFirst(88);
-        queue.pushFirst(99);
-        queue.pushLast(100);
-        queue.pushLast(101);
-
-        queue.printQueue();
-        queue.printArray();
-
-        System.out.println("Add 1 element to front");
-        queue.pushFirst(200);
-        queue.printQueue();
-        queue.printArray();
-        System.out.println();;
-        System.out.println("Add 1 element to rear");
-        queue.pushLast(203);
-        queue.printQueue();
-        queue.printArray();
-        System.out.println();
-
-        System.out.println("Queue elements using iterator:");
-        Iterator<Integer> iterator = queue.iterator();
+        System.out.println("\nDeque elements:");
+        Iterator<Integer> iterator = deque.iterator();
         while (iterator.hasNext()) {
             System.out.print(iterator.next() + " ");
         }
         System.out.println();
-    
+
+        System.out.println("\nPop first element: " + deque.popFirst());
+        System.out.println("Pop last element: " + deque.popLast());
+        System.out.println("Pop last element again: " + deque.popLast() + "\n");
 
 
-        System.out.println(queue.size());
-        System.out.println(queue.getSize());*/
+        deque.printDequeStatus();
+
+        System.out.println("Updated Deque size: " + deque.size());
+        deque.printDequeStatus();
+
+        System.out.println("\nPushing to last:");
+        for (int i = 5; i < 12; i++) {
+            deque.pushLast(i);
+        }
+        deque.printDequeStatus();
+
+
+        System.out.println("\nDeque elements in reverse:");
+        Iterator<Integer> descendingIterator = deque.descendingIterator();
+        while (descendingIterator.hasNext()) {
+            System.out.print(descendingIterator.next() + " ");
+        }
+        System.out.println();
+
+
+        System.out.println("\nUpdated Deque size: " + deque.size() + "\n");
+
+        deque.printDequeStatus();
+
+        // Clear the DeQueue
+        deque.clear();
+        System.out.println("Cleared Deque size: " + deque.size());
+        
+        
     }
 
 }

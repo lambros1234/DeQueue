@@ -65,4 +65,6 @@ public interface DeQueue<E> {
     * sequential order.
     */
     Iterator<E> descendingIterator();
+
+    void printDequeStatus();
 }
