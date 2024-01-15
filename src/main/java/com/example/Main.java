@@ -16,7 +16,7 @@ public class Main {
         deque.printDequeStatus();
     
 
-        System.out.println("\nDeque elements:");
+        System.out.println("\nDeque elements using Iterator:");
         Iterator<Integer> iterator = deque.iterator();
         while (iterator.hasNext()) {
             System.out.print(iterator.next() + " ");
@@ -40,7 +40,7 @@ public class Main {
         deque.printDequeStatus();
 
 
-        System.out.println("\nDeque elements in reverse:");
+        System.out.println("\nDeque elements in reverse using Decsending Iterator:");
         Iterator<Integer> descendingIterator = deque.descendingIterator();
         while (descendingIterator.hasNext()) {
             System.out.print(descendingIterator.next() + " ");
