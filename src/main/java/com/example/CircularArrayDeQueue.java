@@ -239,9 +239,8 @@ public class CircularArrayDeQueue<E> implements DeQueue<E> {
     }
 
     public void printDequeStatus() {
-        System.out.println(Arrays.toString(array));
-
         if (!isEmpty()) {
+            System.out.println(Arrays.toString(array));
             System.out.println("Front is: " + first());
             System.out.println("Rear is: " + last());
         } else {

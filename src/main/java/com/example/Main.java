@@ -49,9 +49,7 @@ public class Main {
         System.out.println("\nUpdated Deque size: " + deque.size() + "\n");
         // Clear the DeQueue
         deque.clear();
-        System.out.println("Cleared Deque size: " + deque.size());
-        
-        
+        System.out.println("Cleared Deque size: " + deque.size());        
     }
 
 }
