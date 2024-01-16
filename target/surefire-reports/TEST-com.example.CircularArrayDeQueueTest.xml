@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.example.CircularArrayDeQueueTest" time="0.029" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.example.CircularArrayDeQueueTest" time="0.03" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="20"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-20\bin"/>
-    <property name="sun.java.command" value="C:\Users\user\AppData\Local\Temp\surefire11413253536009303684\surefirebooter-20240115150305170_3.jar C:\Users\user\AppData\Local\Temp\surefire11413253536009303684 2024-01-15T15-03-05_069-jvmRun1 surefire-20240115150305170_1tmp surefire_0-20240115150305170_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\user\AppData\Local\Temp\surefire807578319479558945\surefirebooter-20240116114046796_3.jar C:\Users\user\AppData\Local\Temp\surefire807578319479558945 2024-01-16T11-40-46_694-jvmRun1 surefire-20240116114046796_1tmp surefire_0-20240116114046796_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\HUA\2ο Ετος\Δομές Δεδομένων\DeQueue\target\test-classes;C:\HUA\2ο Ετος\Δομές Δεδομένων\DeQueue\target\classes;C:\Users\user\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\user\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\user\AppData\Local\Temp\surefire11413253536009303684\surefirebooter-20240115150305170_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\user\AppData\Local\Temp\surefire807578319479558945\surefirebooter-20240116114046796_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="20.0.1+9-29"/>
@@ -58,7 +58,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="64.0"/>
   </properties>
-  <testcase name="testFirstAndLast" classname="com.example.CircularArrayDeQueueTest" time="0.002"/>
+  <testcase name="testFirstAndLast" classname="com.example.CircularArrayDeQueueTest" time="0.0"/>
   <testcase name="testPushAndPop" classname="com.example.CircularArrayDeQueueTest" time="0.0"/>
   <testcase name="testResize" classname="com.example.CircularArrayDeQueueTest" time="0.0"/>
   <testcase name="testIterator" classname="com.example.CircularArrayDeQueueTest" time="0.0"/>

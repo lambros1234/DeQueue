@@ -115,7 +115,7 @@ public class CircularArrayDeQueue<E> implements DeQueue<E> {
 
     @Override
     public boolean isEmpty() {
-        return size == 0;  //The queue is empty when the rear is equal to the front
+        return size == 0 && f == r;  //The queue is empty when the rear is equal to the front
     }
 
     @Override

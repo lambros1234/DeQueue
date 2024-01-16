@@ -27,11 +27,9 @@ public class Main {
         System.out.println("Pop last element: " + deque.popLast());
         System.out.println("Pop last element again: " + deque.popLast() + "\n");
 
-
         deque.printDequeStatus();
-
-        System.out.println("Updated Deque size: " + deque.size());
-        deque.printDequeStatus();
+        System.out.println("Updated Deque size: " + deque.size() + "\n");
+    
 
         System.out.println("\nPushing to last:");
         for (int i = 5; i < 12; i++) {
@@ -49,9 +47,6 @@ public class Main {
 
 
         System.out.println("\nUpdated Deque size: " + deque.size() + "\n");
-
-        deque.printDequeStatus();
-
         // Clear the DeQueue
         deque.clear();
         System.out.println("Cleared Deque size: " + deque.size());
