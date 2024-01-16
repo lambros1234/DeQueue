@@ -2,8 +2,7 @@
 
 ## To run this project install
 
-1. Make sure you have installed the maven command by typing `mvn -v`. If you do not have installed it you can install it
-by typing `sudo apt install maven`
+1. Make sure you have installed the maven command by typing `mvn -v`. If you do not have installed it You can download Apache Maven from the official Apache Maven website. https://maven.apache.org/download.cgi
 
 2. `mvn package` in the directory where the pom.xml file is located
 
